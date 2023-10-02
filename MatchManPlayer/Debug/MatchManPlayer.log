@@ -1,0 +1,5 @@
+﻿  MatchManDrawer.cpp
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\shaderer.h(42): warning C4010: 单行注释包含行继续符
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(58): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(59): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  MatchManPlayer.vcxproj -> D:\zzl_2023\CodeProject\MatchManPlayer\Debug\MatchManPlayer.exe
