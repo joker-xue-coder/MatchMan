@@ -19,6 +19,9 @@ public:
 protected:
 private:
 	void Init();
+
+	void ShadererInit();
+	void TransformInit();
 	void HeadInit();
 	void HeadDraw();
 	void LeftHandInit();
@@ -36,15 +39,34 @@ private:
 	void FrameInit();
 	void FrameDraw();
 
+	void Rotate(glm::mat4& transform, glm::vec3 rotate_center,float angle);
+
+	void Walk();
+
 
 public:
 protected:
 private:
 	Shaderer* m_Shaderer;
 	Shaderer* m_RightFootShaderer;
+	Shaderer* m_LeftFootShaderer;
+	Shaderer* m_RightHandShaderer;
+	Shaderer* m_LeftHandShaderer;
+
 	
 	float m_PointSize;
 	glm::mat4 m_MatchManTransform;
+
+	glm::mat4 m_RightFootTransform0;
+	glm::mat4 m_RightFootTransform00;
+	glm::mat4 m_LeftFootTransform0;
+	glm::mat4 m_LeftFootTransform00;
+	glm::mat4 m_RightHandTransform0;
+	glm::mat4 m_RightHandTransform00;
+	glm::mat4 m_LeftHandTransform0;
+	glm::mat4 m_LeftHandTransform00;
+
+
 
 
 	VertexAttrib* m_CommonAttr;

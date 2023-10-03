@@ -100,5 +100,14 @@
     <None Include="RightFootShader.shader">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="LeftFootShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="LeftHandShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="RightHandShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

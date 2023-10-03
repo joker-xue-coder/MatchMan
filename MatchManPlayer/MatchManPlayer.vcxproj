@@ -154,9 +154,12 @@
     <ClInclude Include="Windower.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LeftFootShader.shader" />
+    <None Include="LeftHandShader.shader" />
     <None Include="myshader.shader" />
     <None Include="noColorShader.shader" />
     <None Include="RightFootShader.shader" />
+    <None Include="RightHandShader.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

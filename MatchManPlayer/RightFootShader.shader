@@ -3,37 +3,19 @@
 
 layout(location = 0) in vec3 aPos;
 
-uniform mat4 rightFootTransform;
+uniform mat4 rightFootTransform0;
+uniform mat4 rightFootTransform00;
 uniform mat4 matchManTransform;
-uniform int flag;
 
 void main()
 {
-	if (flag == 0)
+	if (aPos.y == -0.8)
 	{
-		gl_Position = rightFootTransform * matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
+		gl_Position = rightFootTransform0 * rightFootTransform00 * matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
 	}
-	else if (flag == 1) 
+	else
 	{
-		if (aPos.y == -0.8)
-		{
-			gl_Position = rightFootTransform * matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
-		}
-		else
-		{
-			gl_Position = matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
-		}
-	}
-	else if (flag == 2)
-	{
-		if (aPos.x < 0.2)
-		{
-			gl_Position = rightFootTransform * matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
-		}
-		else
-		{
-			gl_Position = matchManTransform * vec4(aPos.x, aPos.y, aPos.z, 1.0);
-		}
+		gl_Position = rightFootTransform0 * matchManTransform * vec4(aPos.x, aPos.y, aPos.z, 1.0);
 	}
 };
 
