@@ -148,18 +148,27 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderWindower.h" />
     <ClInclude Include="Shaderer.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="TriangleDrawer.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="Windower.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FrameShader.shader" />
+    <None Include="HeadShader.shader" />
     <None Include="LeftFootShader.shader" />
     <None Include="LeftHandShader.shader" />
     <None Include="myshader.shader" />
     <None Include="noColorShader.shader" />
+    <None Include="RectangleShader.shader" />
     <None Include="RightFootShader.shader" />
     <None Include="RightHandShader.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg" />
+    <Image Include="Headache.png" />
+    <Image Include="Headache1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

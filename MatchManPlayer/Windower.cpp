@@ -27,6 +27,19 @@ GLFWwindow * Windower::GetGLFWwindow()
 	return this->m_Window;
 }
 
+void Windower::KeyCallback(GLFWwindow * window, int key, int scancode, int action, int mods)
+{
+	//PrintLog("press or release key");
+	//if (key == GLFW_KEY_0 && action == GLFW_PRESS)
+	//{
+	//	PrintLog("press GLFW_KEY_0");
+	//}
+	//else if (key == GLFW_KEY_0 && action == GLFW_RELEASE)
+	//{
+	//	PrintLog("release GLFW_KEY_0");
+	//}
+}
+
 void Windower::Render()
 {
 	
@@ -35,12 +48,15 @@ void Windower::Render()
 	{
 
 		//会将整个窗口用该颜色刷新
+		//glEnable(GL_DEPTH_TEST);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		std::list<RenderWindower*>::iterator iter;
 		for (iter = this->m_SubRenderWindowers.begin(); iter != this->m_SubRenderWindowers.end(); iter++)
 		{
+			(*iter)->ProcessInput(this->m_Window);
 			(*iter)->Render();
 		}
 
@@ -87,7 +103,7 @@ void Windower::Init()
 	glfwMakeContextCurrent(this->m_Window);
 	//glfwSetFramebufferSizeCallback(this->m_Window,&Windower::FrameBufferSizeCallback);
 
-
+	glfwSetKeyCallback(this->m_Window, Windower::KeyCallback);
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

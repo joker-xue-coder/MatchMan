@@ -1,4 +1,5 @@
 #pragma once
+#include "Common.h"
 #include "Drawer.h"
 #include "Shaderer.h"
 #include "VertexArray.h"
@@ -16,6 +17,7 @@ public:
 	~MatchManDrawer();
 
 	virtual void Draw();
+	virtual void ProcessInput(GLFWwindow *window);
 protected:
 private:
 	void Init();
@@ -47,15 +49,23 @@ private:
 public:
 protected:
 private:
+	unsigned int texture;
+	std::vector<glm::vec3> m_Joints;
+
+
+
 	Shaderer* m_Shaderer;
+	Shaderer* m_HeadShaderer;
 	Shaderer* m_RightFootShaderer;
 	Shaderer* m_LeftFootShaderer;
 	Shaderer* m_RightHandShaderer;
 	Shaderer* m_LeftHandShaderer;
+	Shaderer* m_FrameShaderer;
 
 	
 	float m_PointSize;
 	glm::mat4 m_MatchManTransform;
+	glm::mat4 m_HeadTransform;
 
 	glm::mat4 m_RightFootTransform0;
 	glm::mat4 m_RightFootTransform00;

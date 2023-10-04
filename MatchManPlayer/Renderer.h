@@ -11,6 +11,8 @@ class Renderer
 public:
 	Renderer(RenderWindower* parent);
 	~Renderer();
+	
+	void ProcessInput(GLFWwindow* window);
 
 	void Render();
 

@@ -89,6 +89,9 @@
     <ClInclude Include="MatchManDrawer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="myshader.shader">
@@ -109,5 +112,25 @@
     <None Include="RightHandShader.shader">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="HeadShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="RectangleShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="FrameShader.shader">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Headache.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Headache1.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

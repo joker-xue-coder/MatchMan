@@ -16,6 +16,15 @@ Renderer::~Renderer()
 {
 }
 
+void Renderer::ProcessInput(GLFWwindow * window)
+{
+	std::list<Drawer*>::iterator iter;
+	for (iter = this->m_SubDrawers.begin(); iter != this->m_SubDrawers.end(); iter++)
+	{
+		(*iter)->ProcessInput(window);
+	}
+}
+
 void Renderer::Render()
 {
 	std::list<Drawer*>::iterator iter;

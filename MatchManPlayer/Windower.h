@@ -20,6 +20,8 @@ public:
 	~Windower();
 	GLFWwindow* GetGLFWwindow();
 
+	static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 	void Render();
 
 	void AddSubRenderWindower(RenderWindower* subWindower);

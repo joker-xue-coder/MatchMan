@@ -11,11 +11,11 @@ void main()
 {
 	if (aPos.x == -0.4)
 	{
-		gl_Position = leftHandTransform0 * leftHandTransform00 * matchManTransform *vec4(aPos.x, aPos.y, aPos.z, 1.0);
+		gl_Position = matchManTransform * leftHandTransform0 * leftHandTransform00 *vec4(aPos.x, aPos.y, aPos.z, 1.0);
 	}
 	else
 	{
-		gl_Position = leftHandTransform0 * matchManTransform * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+		gl_Position = matchManTransform * leftHandTransform0 * vec4(aPos.x, aPos.y, aPos.z, 1.0);
 	}
 };
 

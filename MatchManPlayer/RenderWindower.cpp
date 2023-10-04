@@ -13,6 +13,14 @@ RenderWindower::~RenderWindower()
 {
 }
 
+void RenderWindower::ProcessInput(GLFWwindow * windower)
+{
+	if (this->m_SubRenderer != nullptr)
+	{
+		this->m_SubRenderer->ProcessInput(windower);
+	}
+}
+
 //渲染之前必须要先设定渲染窗口的位置和大小，即确认渲染的矩形框
 void RenderWindower::Render()
 {
