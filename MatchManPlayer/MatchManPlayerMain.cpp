@@ -5,6 +5,7 @@
 #include "TriangleDrawer.h"
 #include "RectangleDrawer.h"
 #include "MatchManDrawer.h"
+#include "TextDrawer.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -62,6 +63,14 @@ int main(int argc,char* argv[],char* env[])
 
 	RectangleDrawer* rectdrawer1 = new RectangleDrawer(renderer2);
 	MatchManDrawer* matchman = new MatchManDrawer(renderer2);
+#pragma endregion
+#pragma region »æÖÆ×ÖÌåµ÷ÊÔ
+	RenderWindower* renderwindower3 = new RenderWindower(windower, 200, 600, 600, 0);
+	Renderer* renderer3 = new Renderer(renderwindower3);
+
+	//RectangleDrawer* rectdrawer2 = new RectangleDrawer(renderer3);
+	TextDrawer* textDrawer = new TextDrawer(renderer3, "xiawumanhei.ttf");
+	textDrawer->InitTexturers();
 #pragma endregion
 	windower->Render();
 

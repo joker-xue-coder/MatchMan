@@ -1,7 +1,8 @@
-﻿  MatchManDrawer.cpp
+﻿  TextDrawer.cpp
 d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\shaderer.h(42): warning C4010: 单行注释包含行继续符
-d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(226): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(227): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(229): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\matchmandrawer.cpp(230): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\textdrawer.cpp(116): warning C4244: “*=”: 从“float”转换到“int”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\textdrawer.cpp(117): warning C4244: “*=”: 从“float”转换到“int”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\textdrawer.cpp(241): warning C4244: “*=”: 从“float”转换到“int”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\textdrawer.cpp(242): warning C4244: “*=”: 从“float”转换到“int”，可能丢失数据
+d:\zzl_2023\codeproject\matchmanplayer\matchmanplayer\textdrawer.cpp(273): warning C4715: “TextDrawer::FindCharTexturer”: 不是所有的控件路径都返回值
   MatchManPlayer.vcxproj -> D:\zzl_2023\CodeProject\MatchManPlayer\Debug\MatchManPlayer.exe

@@ -241,43 +241,9 @@ void MatchManDrawer::HeadInit()
 	this->m_HeadVAO->AddVertexAttrib(headTextureAttr1);
 
 #pragma region 初始化纹理
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	// 为当前绑定的纹理对象设置环绕、过滤方式
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// 加载并生成纹理
-	int width, height, nrChannels;
 	std::string headPath = "Headache1.png";
 	headPath = "awesomeface.png";
-	unsigned char *data = stbi_load(headPath.c_str(), &width, &height, &nrChannels, STBI_rgb_alpha);
-	if (data)
-	{
-		//4通道数据可以使用3通道数据来读取,只是数据会错乱.
-		//3通道数据不可以使用4通道来读取,会导致内存越界.
-		if (nrChannels == 3)
-		{
-			//3通道的话就对应GL_RGB
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else if (nrChannels == 4)
-		{
-			//4通道的话就对应GL_RGBA
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-
+	this->m_HeadTexturer = new Texturer(headPath);
 
 #pragma endregion
 
@@ -290,14 +256,15 @@ void MatchManDrawer::HeadDraw()
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//this->m_Shaderer->Bind();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture);
 	this->m_HeadShaderer->Bind();
 	this->m_HeadVAO->Bind();
-	
+	int slot = 67;
+	this->m_HeadTexturer->Bind(slot);
 	this->m_HeadShaderer->SetUniformMat4f("headTransform", this->m_HeadTransform);
 	this->m_HeadShaderer->SetUniformMat4f("matchManTransform", this->m_MatchManTransform);
-	this->m_HeadShaderer->SetUniform1i("ourTexture", 0);
+	this->m_HeadShaderer->SetUniform1i("ourTexture", slot);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 362);
 	this->m_HeadVAO->Unbind();
 	this->m_HeadShaderer->Unbind();

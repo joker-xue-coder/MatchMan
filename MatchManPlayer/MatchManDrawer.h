@@ -4,6 +4,7 @@
 #include "Shaderer.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
+#include "Texturer.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -75,6 +76,8 @@ private:
 	glm::mat4 m_RightHandTransform00;
 	glm::mat4 m_LeftHandTransform0;
 	glm::mat4 m_LeftHandTransform00;
+
+	Texturer* m_HeadTexturer;
 
 
 
