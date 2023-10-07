@@ -37,6 +37,8 @@ void MatchManDrawer::ProcessInput(GLFWwindow * window)
 {
 	//使用else if 一次只能处理一个按键
 	// 并行使用if 一次可以处理多个按键
+	//GLFW_PRESS和GLFW_RELEASE指的是状态
+	//如果按键处于RELEASE状态就会被执行而不是指释放动作的发生
 #pragma region	处理按下事件
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
@@ -164,6 +166,91 @@ void MatchManDrawer::ProcessInput(GLFWwindow * window)
 	}
 #pragma endregion
 
+
+#pragma region 处理方向键按钮事件
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		glm::vec3 translateVec = glm::vec3(-0.001f, 0.0f, 0.0f);
+		this->m_MatchManTransform = glm::translate(this->m_MatchManTransform, translateVec);
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE)
+	{
+		//this->m_MatchManTransform = glm::mat4(1.0f);
+	}
+#pragma endregion
+#pragma region 空格键下蹲处理
+	static bool flag = false;
+	float footLength1 = 0.282843f;
+	float yFoot1Angle = 45.0f;
+	static float transAngle = 0.0f;
+	if (transAngle >= 45.0f)
+	{
+		transAngle = 0.0f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		transAngle += 0.09f;
+		//旋转左脚
+		//左脚上半段
+		glm::vec3 rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform0, rotateCenter0, transAngle*-1.0f);
+		//左脚下半段
+		glm::vec3 rotateCenter00 = glm::vec3(-0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform00, rotateCenter00, transAngle);
+
+		//旋转右脚
+		//右脚上半段
+		rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_RightFootTransform0, rotateCenter0, transAngle);
+		//右脚下半段
+		rotateCenter00 = glm::vec3(0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_RightFootTransform00, rotateCenter00, transAngle*-1.0f);
+
+		this->m_MatchManTransform = glm::mat4(1.0f);
+		glm::vec3 transVec3 = glm::vec3(0.0f, -0.2f + glm::cos((yFoot1Angle + transAngle)*(glm::pi<float>() / 180.0f))*footLength1, 0.0f);
+		printf("旋转度数：%f 度 down %.6f units\n",transAngle, transVec3.y);
+		this->m_MatchManTransform = glm::translate(this->m_MatchManTransform, transVec3);
+		flag = true;
+	}
+	if (!flag)
+	{
+		return;
+	}
+	static float transAngle1 = 0.0f;
+	if (transAngle1 >= 45.0f)
+	{
+		transAngle1 = 0.0f;
+		flag = false;
+		return;
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		transAngle1 += 0.09f;
+		//旋转左脚
+		//左脚上半段
+		glm::vec3 rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform0, rotateCenter0, transAngle1);
+		//左脚下半段
+		glm::vec3 rotateCenter00 = glm::vec3(-0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform00, rotateCenter00, transAngle1*-1.0f);
+
+		//旋转右脚
+		//右脚上半段
+		rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_RightFootTransform0, rotateCenter0, transAngle1*-1.0f);
+		//右脚下半段
+		rotateCenter00 = glm::vec3(0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_RightFootTransform00, rotateCenter00, transAngle1);
+
+		this->m_MatchManTransform = glm::mat4(1.0f);
+		glm::vec3 transVec3 = glm::vec3(0.0f, -0.2f + glm::sin((yFoot1Angle + transAngle1)*(glm::pi<float>() / 180.0f))*footLength1, 0.0f);
+		printf("旋转度数：%f 度 down %.6f units\n", transAngle1, transVec3.y);
+		this->m_MatchManTransform = glm::translate(this->m_MatchManTransform, transVec3);
+		//this->m_LeftFootTransform0 = glm::mat4(1.0f);
+		//this->m_RightFootTransform0 = glm::mat4(1.0f);
+		//this->m_MatchManTransform = glm::mat4(1.0f);
+	}
+#pragma endregion
 }
 
 void MatchManDrawer::Init()
