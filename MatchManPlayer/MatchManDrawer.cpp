@@ -171,7 +171,101 @@ void MatchManDrawer::ProcessInput(GLFWwindow * window)
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 	{
 		glm::vec3 translateVec = glm::vec3(-0.001f, 0.0f, 0.0f);
-		this->m_MatchManTransform = glm::translate(this->m_MatchManTransform, translateVec);
+		//this->m_MatchManTransform = glm::translate(this->m_MatchManTransform, translateVec);
+
+		//×ßÂ·µÄ³õÊ¼×´Ì¬
+		float angleStraight = 45.0f;
+		//Ë«½ÅÖ±Á¢
+		glm::vec3 rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform0, rotateCenter0, angleStraight);
+		glm::vec3 rotateCenter00 = glm::vec3(-0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_LeftFootTransform00, rotateCenter00, angleStraight*-1.0f);
+		rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+		this->Rotate(this->m_RightFootTransform0, rotateCenter0, angleStraight*-1.0);
+		rotateCenter00 = glm::vec3(0.2f, -0.6f, 0.0f);
+		this->Rotate(this->m_RightFootTransform00, rotateCenter00, angleStraight);
+
+
+#pragma region Ô­µØÌ¤²½
+
+		static float leftAngle0 = 0.0f;
+		static float leftAngle00 = 0.0f;
+		static float rightAngle0 = 0.0f;
+		static float rightAngle00 = 0.0f;
+
+		static bool lrFlag = false;
+		if (lrFlag == true)
+		{
+			static bool flag = true;
+			if (flag == true)
+			{
+				leftAngle0 += 0.01f;
+				leftAngle00 += 0.01f;
+				if (leftAngle0 >= 45.0f)
+				{
+					flag = false;
+				}
+			}
+			else
+			{
+				leftAngle0 -= 0.1f;
+				leftAngle00 -= 0.01f;
+				if (leftAngle0 <= 0.0f)
+				{
+					flag = true;
+					lrFlag = false;
+				}
+			}
+			//×ó½ÅÖ±Á¢
+			//×ó½ÅÉÏ°ë¶ÎË³Ê±ÕëÐý×ª45¡ã
+			rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+			this->Rotate(this->m_LeftFootTransform0, rotateCenter0, leftAngle0);
+			//×ó½ÅÏÂ°ë¶ÎÄæÊ±ÕëÐý×ª45¡ã
+			rotateCenter00 = glm::vec3(-0.2f, -0.6f, 0.0f);
+			this->Rotate(this->m_LeftFootTransform00, rotateCenter00, leftAngle00);
+		}
+		else
+		{
+			static bool flag = true;
+			if (flag == true)
+			{
+				rightAngle0 += 0.01f;
+				rightAngle00 += 0.001f;
+				if (rightAngle0 >= 45.0f)
+				{
+					flag = false;
+				}
+			}
+			else
+			{
+				rightAngle0 -= 0.1f;
+				rightAngle00 -= 0.01f;
+				if (rightAngle0 <= 0.0f)
+				{
+					flag = true;
+					lrFlag = true;
+				}
+			}
+
+			//ÓÒ½ÅÌßÍÈ
+			//ÓÒ½ÅÉÏ°ë¶Î
+			rotateCenter0 = glm::vec3(0.0f, -0.4f, 0.0f);
+			this->Rotate(this->m_RightFootTransform0, rotateCenter0, rightAngle0);
+			//ÓÒ½ÅÏÂ°ë¶Î
+			rotateCenter00 = glm::vec3(0.2f, -0.6f, 0.0f);
+			this->Rotate(this->m_RightFootTransform00, rotateCenter00, rightAngle00);
+		}
+
+		
+
+		
+
+
+
+
+
+#pragma endregion 
+
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE)
 	{

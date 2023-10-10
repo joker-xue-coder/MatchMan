@@ -57,15 +57,36 @@ int main(int argc,char* argv[],char* env[])
 #pragma endregion
 
 
-#pragma region 火柴人调试
+#pragma region 火柴人调试（左边）
 	RenderWindower* renderwindower2 = new RenderWindower(windower, 600, 600, 0, 0);
 	Renderer* renderer2 = new Renderer(renderwindower2);
 
 	RectangleDrawer* rectdrawer1 = new RectangleDrawer(renderer2);
 	MatchManDrawer* matchman = new MatchManDrawer(renderer2);
 #pragma endregion
+#pragma region 火柴人调试（右上）
+	RenderWindower* renderwindower4 = new RenderWindower(windower, 200, 200, 600, 400);
+	Renderer* renderer4 = new Renderer(renderwindower4);
+
+	RectangleDrawer* rectdrawer2 = new RectangleDrawer(renderer4);
+	MatchManDrawer* matchman2 = new MatchManDrawer(renderer4);
+#pragma endregion
+#pragma region 火柴人调试（右中）
+	RenderWindower* renderwindower5 = new RenderWindower(windower, 200, 200, 600, 200);
+	Renderer* renderer5 = new Renderer(renderwindower5);
+
+	RectangleDrawer* rectdrawer3 = new RectangleDrawer(renderer5);
+	MatchManDrawer* matchman3 = new MatchManDrawer(renderer5);
+#pragma endregion
+#pragma region 火柴人调试（右下）
+	RenderWindower* renderwindower6 = new RenderWindower(windower, 200, 200, 600, 0);
+	Renderer* renderer6 = new Renderer(renderwindower6);
+
+	RectangleDrawer* rectdrawer4 = new RectangleDrawer(renderer6);
+	MatchManDrawer* matchman4 = new MatchManDrawer(renderer6);
+#pragma endregion
 #pragma region 绘制字体调试
-	RenderWindower* renderwindower3 = new RenderWindower(windower, 200, 600, 600, 0);
+	RenderWindower* renderwindower3 = new RenderWindower(windower, 200, 400, 600, 0);
 	Renderer* renderer3 = new Renderer(renderwindower3);
 
 	//RectangleDrawer* rectdrawer2 = new RectangleDrawer(renderer3);

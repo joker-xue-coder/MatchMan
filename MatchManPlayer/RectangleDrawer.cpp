@@ -53,69 +53,67 @@ RectangleDrawer::RectangleDrawer(Renderer* parent,int zIndex)
 	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	glBindVertexArray(0);
 #pragma endregion
-
-#pragma region 初始化纹理
-	
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	// 为当前绑定的纹理对象设置环绕、过滤方式
-	// set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);	// set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	// set texture filtering parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// 加载并生成纹理
-	int width, height, nrChannels;
+	std::string imgMax = "containerA.jpg";
+	//std::string imgMin = "Headache.jpg";
+	std::string imgMin = "awesomeface.jpg";
+#pragma region 使用Texturer来完成纹理的创建
+	this->m_Texturer = new Texturer(imgMax);
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		if (nrChannels == 3)
-		{
-			//3通道的话就对应GL_RGB
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else if (nrChannels == 4)
-		{
-			//4通道的话就对应GL_RGBA
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, texture);
+	this->m_TextureDataMax = stbi_load(imgMax.c_str(), &this->m_MaxWidth, &this->m_MaxHeight, &this->m_MaxChannel, 0);
+	this->m_TextureDataMin = stbi_load(imgMin.c_str(), &this->m_MinWidth, &this->m_MinHeight, &this->m_MinChannel, 0);
 #pragma endregion
 
 
 }
 
+
+
+
 RectangleDrawer::~RectangleDrawer()
 {
+
+	stbi_image_free(this->m_TextureDataMax);
+	stbi_image_free(this->m_TextureDataMin);
+}
+
+void RectangleDrawer::ProcessInput(GLFWwindow * window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		this->m_Texturer->RefreshSubTextureData(this->m_MaxWidth, this->m_MaxHeight, this->m_TextureDataMax);
+	}
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+	{
+		this->m_Texturer->RefreshSubTextureData(this->m_MinWidth, this->m_MinHeight, this->m_TextureDataMin);
+	}
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+	{
+		
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+
+	}
 }
 
 void RectangleDrawer::Draw()
 {
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	this->m_Texturer->Bind();
 	this->m_ShadererProgram->Bind();
 	glm::mat4 trans = glm::mat4(1.0f);
 	glm::vec3 translateVec = glm::vec3(sin((float)glfwGetTime()), 0.0f, 0.0f);
 	trans = glm::translate(trans, translateVec);
 	this->m_ShadererProgram->SetUniformMat4f("rectangleTransform", trans);
-	this->m_ShadererProgram->SetUniform1i("ourTexture", 1);
+	this->m_ShadererProgram->SetUniform1i("ourTexture", 0);
 	//this->m_ShadererProgram->SetUniform1f("color", 1.0f);
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	//glDrawArrays(GL_TRIANGLES, 0, 6);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	//glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	this->m_ShadererProgram->Unbind();
+	this->m_Texturer->Unbind();
 }

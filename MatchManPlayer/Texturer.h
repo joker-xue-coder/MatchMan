@@ -20,6 +20,11 @@ public:
 	Texturer(unsigned char* data, int width, int height, std::map<int, TexturerParameter> texturerParas = std::map<int, TexturerParameter>());
 	~Texturer();
 
+	void RefreshTextureData(int width, int height, void* data, int xOffset = 0, int yOffset = 0, int format = GL_RGB, int type = GL_UNSIGNED_BYTE);
+
+
+	void RefreshSubTextureData(int width, int height, void* data, int xOffset = 0, int yOffset = 0, int format = GL_RGB, int type = GL_UNSIGNED_BYTE);
+
 	void Bind(unsigned int  slot = 0)const;
 	void Unbind()const;
 

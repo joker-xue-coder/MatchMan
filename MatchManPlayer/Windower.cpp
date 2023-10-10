@@ -83,8 +83,6 @@ void Windower::Init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
-
-
 	/*int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
@@ -112,6 +110,10 @@ void Windower::Init()
 		m_State = -1;
 		return;
 	}
+
+
+	printf("Version: %s\n", glGetString(GL_VERSION));
+
 
 }
 
